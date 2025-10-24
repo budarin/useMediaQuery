@@ -1,0 +1,39 @@
+{
+    "name": "@budarin/useMediaQuery",
+    "version": "1.0.0",
+    "description": "React hook for media queries",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "keywords": [
+        "react",
+        "hook",
+        "media",
+        "query"
+    ],
+    "author": "Vadim Budarin",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/budarin/useMediaQuery.git"
+    },
+    "bugs": {
+        "url": "https://github.com/budarin/useMediaQuery/issues"
+    },
+    "homepage": "https://github.com/budarin/useMediaQuery#readme",
+    "peerDependencies": {
+        "react": ">=18.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^19.2.2",
+        "prettier": "^3.6.2",
+        "react": "^19.2.0",
+        "typescript": "^5.9.3"
+    },
+    "scripts": {
+        "build": "tsc",
+        "pnpm-install": "pnpm install",
+        "upgrade-dependencies": "pnpm upgrade -i",
+        "publish-package": "pnpm build && pnpm publish --access=public"
+    }
+}
