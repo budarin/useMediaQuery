@@ -2,6 +2,8 @@
 
 A modern React hook for media queries built with `useSyncExternalStore` for optimal performance and SSR compatibility.
 
+> 🇷🇺 [Русская версия документации](README.ru.md)
+
 ## Features
 
 - ✅ **SSR Safe** - No hydration mismatches
