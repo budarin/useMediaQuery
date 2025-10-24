@@ -1,10 +1,12 @@
-.vscode
-.prettierrc.mjs
-.prettierignore
+# Исключаем исходные файлы и конфигурацию
 src/
-scripts/
-.gitignore
-pnpm-lock.yaml
 tsconfig.json
-tsconfig.tsbuildinfo
-arch.md
+pnpm-lock.yaml
+.gitignore
+
+# Включаем только нужные файлы
+!dist/
+!README.md
+!README.ru.md
+!LICENSE
+!package.json
