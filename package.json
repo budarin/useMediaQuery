@@ -1,5 +1,5 @@
 {
-    "name": "@budarin/useMediaQuery",
+    "name": "@budarin/use-media-query",
     "version": "1.0.0",
     "description": "React hook for media queries",
     "main": "dist/index.js",
