@@ -1,32 +1,43 @@
 import { useSyncExternalStore } from 'react';
 
-function getSnapshot(query: string): () => boolean {
-    return function (): boolean {
-        return window.matchMedia(query).matches;
+function createMediaQueryStore(query: string) {
+    if (typeof window === 'undefined') {
+        // SSR fallback
+        return {
+            subscribe: () => () => {},
+            getSnapshot: () => false,
+        };
+    }
+
+    const mediaQuery = window.matchMedia(query);
+
+    return {
+        subscribe: (callback: () => void) => {
+            // MediaQueryList 'change' event automatically fires when:
+            // - Window is resized
+            // - Device orientation changes
+            // - Any other viewport change that affects the media query result
+            mediaQuery.addEventListener('change', callback);
+
+            return () => {
+                mediaQuery.removeEventListener('change', callback);
+            };
+        },
+        getSnapshot: () => mediaQuery.matches,
     };
 }
 
-function subscribe(query: string): (callback: () => void) => () => void {
-    return function (callback: () => void): () => void {
-        const controller = new AbortController();
-        const mediaQuery = window.matchMedia(query);
+// Cache stores by query to avoid recreating MediaQueryList objects
+const storeCache = new Map<string, ReturnType<typeof createMediaQueryStore>>();
 
-        mediaQuery.addEventListener('change', callback, {
-            signal: controller.signal,
-        });
-        window.addEventListener('orientationchange', callback, {
-            signal: controller.signal,
-        });
-        window.addEventListener('resize', callback, {
-            signal: controller.signal,
-        });
-
-        return () => {
-            controller.abort();
-        };
-    };
+function getStore(query: string) {
+    if (!storeCache.has(query)) {
+        storeCache.set(query, createMediaQueryStore(query));
+    }
+    return storeCache.get(query)!;
 }
 
 export const useMediaQuery = (query: string): boolean => {
-    return useSyncExternalStore(subscribe(query), getSnapshot(query));
+    const store = getStore(query);
+    return useSyncExternalStore(store.subscribe, store.getSnapshot);
 };

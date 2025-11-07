@@ -8,7 +8,7 @@ A modern React hook for media queries built with `useSyncExternalStore` for opti
 
 - ✅ **SSR Safe** - No hydration mismatches
 - ✅ **Performance Optimized** - Built on `useSyncExternalStore`
-- ✅ **Window Events** - Responds to `resize` and `orientationchange` events
+- ✅ **Automatic Updates** - Automatically responds to window resize, orientation changes, and all viewport updates
 - ✅ **TypeScript Support** - Full type definitions
 - ✅ **Modern React** - Compatible with React 18+
 - ✅ **Zero Dependencies** - Lightweight implementation
@@ -95,7 +95,6 @@ This hook is built on React's `useSyncExternalStore` instead of the traditional 
 - Race conditions between `useState` and `useEffect`
 - Stale state if media query changes before component mounts
 - Poor SSR compatibility
-- **Missing window events** - Doesn't respond to `resize` and `orientationchange`
 - **React 18+ concurrent rendering issues** - State can become inconsistent during interrupted renders
 
 ### ✅ useSyncExternalStore Benefits
@@ -105,7 +104,7 @@ This hook is built on React's `useSyncExternalStore` instead of the traditional 
 - **No race conditions** - Store is always synchronized
 - **Better performance** - React optimizes subscriptions
 - **Future-proof** - Built for React 18+ concurrent features
-- **Complete event coverage** - Responds to `resize`, `orientationchange`, AND media query changes
+- **Automatic viewport tracking** - `MediaQueryList.change` automatically fires on window resize, orientation changes, and any viewport update
 - **Concurrent rendering safe** - No state inconsistencies during interrupted renders
 
 ### 🚨 Critical React 18+ Issue
